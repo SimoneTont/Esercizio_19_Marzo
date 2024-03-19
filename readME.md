@@ -28,6 +28,7 @@ Lista di corsi della palestra, partecipanti per ogni corso
 Comandi
 
 composer create-project laravel/laravel:^10.0 progetto_settimana7_backend
-composer require laravel/breeze --dev
+cd progetto_settimana7_backend
+composer require laravel/breeze:=1.19 --dev
 php artisan breeze:install
 php artisan breeze:install api
