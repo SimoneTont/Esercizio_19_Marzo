@@ -30,5 +30,6 @@ Comandi
 composer create-project laravel/laravel:^10.0 progetto_settimana7_backend
 cd progetto_settimana7_backend
 composer require laravel/breeze:=1.19 --dev
+composer require laravel/breeze --dev
 php artisan breeze:install
 php artisan breeze:install api
