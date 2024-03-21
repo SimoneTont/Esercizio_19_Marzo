@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            @endif
+            @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach($gymCourses as $course)
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -80,16 +80,20 @@
                         <p class="text-gray-600">{{ $course->description }}</p>
                         @php
                         $booking = auth()->user()->bookings()->where('course_id', $course->id)->where('pending', false)->first();
-                        @endphp
-
-                        @if($booking)
-                        <p class="text-green-500">Booked</p>
-                        @else
-                        @php
                         $existingBooking = auth()->user()->bookings()->where('course_id', $course->id)->where('pending', true)->exists();
                         @endphp
 
-                        @if($existingBooking)
+                        @if($booking)
+                        <div class="mt-2">
+                            <form action="{{ route('bookings.cancel', $booking->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 text-white font-semibold px-4 py-2 rounded-md">
+                                    Cancel Booking
+                                </button>
+                            </form>
+                        </div>
+                        @elseif($existingBooking)
                         <p class="text-red-500">You already have a pending booking request for this course.</p>
                         @else
                         <form action="{{ route('bookings.store') }}" method="POST">
@@ -100,10 +104,10 @@
                             </button>
                         </form>
                         @endif
-                        @endif
                     </div>
                 </div>
                 @endforeach
+                @endif
             </div>
         </div>
     </div>

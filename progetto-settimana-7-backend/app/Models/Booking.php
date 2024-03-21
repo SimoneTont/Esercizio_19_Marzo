@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +11,7 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'course_id',
+        'timing_id',
         'booked',
         'pending',
     ];
@@ -25,5 +25,9 @@ class Booking extends Model
     {
         return $this->belongsTo(GymCourse::class, 'course_id');
     }
-}
 
+    public function timing()
+    {
+        return $this->belongsTo(Timing::class, 'timing_id');
+    }
+}

@@ -50,4 +50,11 @@ class BookingController extends Controller
         $booking->delete();
         return redirect()->back()->with('success', 'Booking removed successfully.');
     }
+
+    public function cancel(Booking $booking)
+{
+    $booking->delete();
+    return redirect()->back()->with('success', 'Booking canceled successfully.');
+}
+
 }

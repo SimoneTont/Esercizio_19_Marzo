@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('course_id')->constrained('gym_courses');
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('timing_id')->nullable()->constrained('timings')->onDelete('set null');
             $table->boolean('booked')->default(false);
             $table->boolean('pending')->default(true);
             $table->timestamps();
@@ -29,3 +30,4 @@ return new class extends Migration
         Schema::dropIfExists('bookings');
     }
 };
+

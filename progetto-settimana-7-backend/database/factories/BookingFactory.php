@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Booking;
+use App\Models\GymCourse;
+use App\Models\Timing;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookingFactory extends Factory
@@ -22,8 +25,15 @@ class BookingFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => \App\Models\User::factory(),
-            'course_id' => \App\Models\GymCourse::factory(),
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'course_id' => function () {
+                return GymCourse::factory()->create()->id;
+            },
+            'timing_id' => function () {
+                return Timing::factory()->create()->id;
+            },
             'booked' => $this->faker->boolean,
             'pending' => $this->faker->boolean,
         ];
