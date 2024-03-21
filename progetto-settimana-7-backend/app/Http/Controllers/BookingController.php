@@ -10,9 +10,11 @@ class BookingController extends Controller
 {
     public function index()
     {
-        $gymCourses = GymCourse::all();
         $pendingBookings = Booking::where('pending', true)->get();
-        return view('dashboard', compact('gymCourses', 'pendingBookings'));
+        $approvedBookings = Booking::where('pending', false)->get();
+        $gymCourses = GymCourse::all();
+
+        return view('dashboard', compact('pendingBookings', 'approvedBookings', 'gymCourses'));
     }
     public function store(Request $request)
     {
@@ -41,5 +43,11 @@ class BookingController extends Controller
     {
         $booking->delete();
         return redirect()->back()->with('success', 'Booking rejected.');
+    }
+
+    public function remove(Booking $booking)
+    {
+        $booking->delete();
+        return redirect()->back()->with('success', 'Booking removed successfully.');
     }
 }
