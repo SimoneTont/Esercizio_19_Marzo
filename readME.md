@@ -1,3 +1,12 @@
+Credenziali dell'admin:
+'name' => 'Admin',
+'email' => 'admin@example.com',
+'password' => 'IFOAadmin',
+
+Credenziali utente:
+'name' => 'TestUser',
+'email' => 'user@example.com',
+'password' => 'testuser'
 Struttura:
 
 User:
